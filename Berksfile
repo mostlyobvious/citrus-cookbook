@@ -4,3 +4,5 @@ site :opscode
 # end
 
 metadata
+
+cookbook 'ruby-build', github: 'arkency/ruby-build-cookbook'

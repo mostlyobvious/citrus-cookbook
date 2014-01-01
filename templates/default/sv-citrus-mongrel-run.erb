@@ -1,0 +1,10 @@
+#!/bin/sh
+
+USER=<%= @options[:user] %>
+CURRENT_DIR=<%= ::File.join(@options[:home], 'current') %>
+
+cd $CURRENT_DIR
+
+exec 2>&1
+m2sh load
+exec chpst -u$USER m2sh start -name main

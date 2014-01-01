@@ -1,0 +1,9 @@
+#!/bin/sh
+
+USER=<%= @options[:user] %>
+CURRENT_DIR=<%= ::File.join(@options[:home], 'current') %>
+
+cd $CURRENT_DIR
+
+exec 2>&1
+PATH=<%= @options[:ruby_path] %>:$PATH exec chpst -u$USER bundle exec ruby -Ilib bin/citrus-web
