@@ -93,7 +93,7 @@ runit_service "citrus-web" do
   log false
   options :user => username,
           :home => home_dir,
-          :ruby_path => ::File.join(home_dir, ruby_version, 'bin')
+          :ruby_path => ::File.join(home_dir, ruby_version, "bin")
 end
 
 runit_service "citrus-mongrel" do
