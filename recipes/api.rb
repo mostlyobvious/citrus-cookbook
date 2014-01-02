@@ -102,4 +102,14 @@ runit_service "citrus-mongrel" do
           :home => home_dir
 end
 
+template "/etc/nginx/sites-available/citrus-api" do
+  source "nginx-backend.erb"
+  variables :upstream => "127.0.0.1:8080",
+            :server_name => "api.citrus.arkency",
+            :root => ::File.join(home_dir, "current", "public")
+  notifies :reload, "service[nginx]"
+end
+
+nginx_site "citrus-api"
+
 
