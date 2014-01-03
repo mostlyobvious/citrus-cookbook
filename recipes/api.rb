@@ -85,8 +85,8 @@ deploy_revision home_dir do
 
   action :deploy
 
-  notifies :restart, "runit_service[citrus-web]", :delayed
-  notifies :restart, "runit_service[citrus-mongrel]", :delayed
+  notifies :restart, "runit_service[citrus-web]"
+  notifies :restart, "runit_service[citrus-mongrel]"
 end
 
 runit_service "citrus-web" do
