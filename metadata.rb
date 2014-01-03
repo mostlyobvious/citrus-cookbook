@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 name             'citrus'
 maintainer       'Paweł Pacana'
 maintainer_email 'pawel.pacana@syswise.eu'
