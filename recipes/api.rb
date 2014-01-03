@@ -51,19 +51,6 @@ hostsfile_entry "127.0.0.1" do
   action :append
 end
 
-runit_service "citrus-web" do
-  log false
-  options :user => username,
-          :home => home_dir,
-          :ruby_path => ::File.join(home_dir, ruby_version, "bin")
-end
-
-runit_service "citrus-mongrel" do
-  log false
-  options :user => username,
-          :home => home_dir
-end
-
 deploy_revision home_dir do
   repository "https://github.com/pawelpacana/citrus-web"
   user  username
@@ -98,10 +85,22 @@ deploy_revision home_dir do
 
   action :deploy
 
-  notifies :restart, "runit_service[citrus-web]"
-  notifies :restart, "runit_service[citrus-mongrel]"
+  notifies :restart, "runit_service[citrus-web]", :delayed
+  notifies :restart, "runit_service[citrus-mongrel]", :delayed
 end
 
+runit_service "citrus-web" do
+  log false
+  options :user => username,
+          :home => home_dir,
+          :ruby_path => ::File.join(home_dir, ruby_version, "bin")
+end
+
+runit_service "citrus-mongrel" do
+  log false
+  options :user => username,
+          :home => home_dir
+end
 
 template "/etc/nginx/sites-available/citrus-api" do
   source "nginx-backend.erb"
